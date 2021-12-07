@@ -13,7 +13,7 @@ public class StateMachine : MonoBehaviour
 
     private State GetCurrentState()
     {
-        return States.count > 0 ? States.Peek() : null;
+        return States.Count > 0 ? States.Peek() : null;
     }
 
     private void Update()
@@ -25,7 +25,7 @@ public class StateMachine : MonoBehaviour
     public void PushState()
     {
         if (GetCurrentState() != null)
-            GetCurrentState().onExit();
+            GetCurrentState().OnExit();
     }
 
     public void PushState(System.Action active, System.Action onEnter, System.Action onExit)

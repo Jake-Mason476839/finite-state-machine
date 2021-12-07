@@ -8,9 +8,11 @@ public class Player : MonoBehaviour
     private Animator animator;
     private float speed;
     private Rigidbody body;
+    private Health health;
 
     void Start()
     {
+        health = GetComponent<Health>();
         animator = transform.GetChild(0).GetComponent<Animator>();
         body = GetComponent<Rigidbody>();
         speed = 1.5f;
@@ -32,5 +34,15 @@ public class Player : MonoBehaviour
         }
 
         animator.SetBool("Walking", movementVector != Vector3.zero);
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Hurt(2, 2);
+        }
+    }
+
+    public void Hurt(int amount, int delay = 0)
+    {
+        StartCoroutine(health.TakeDamageDelayed(amount, delay));
     }
 }
