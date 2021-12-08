@@ -30,7 +30,7 @@ public class Zombie : MonoBehaviour
     void Update()
     {
         playerIsNear = Vector3.Distance(transform.position, player.transform.position) < 5;
-        withinAttackRange = Vector3.Distance(transform.position, player.transform.position) < 1;
+        withinAttackRange = Vector3.Distance(transform.position, player.transform.position) < 2;
     }
 
     void OnIdleEnter()
@@ -105,7 +105,7 @@ public class Zombie : MonoBehaviour
         }
         if (withinAttackRange)
         {
-            brain.PushState(Attack, OnEnterAttack, null);
+            brain.PushState(Attack, OnAttackEnter, null);
         }
     }
 
@@ -114,7 +114,7 @@ public class Zombie : MonoBehaviour
         animator.SetBool("Chase", false);
     }
 
-    void OnEnterAttack()
+    void OnAttackEnter()
     {
         agent.ResetPath();
         stateNote.text = "Attack";
